@@ -110,7 +110,9 @@ public final class Bootstrap {
         if ((value == null) || (value.equals("")))
             return parent;
 
+        //存放路径
         ArrayList repositoryLocations = new ArrayList();
+        //存放类型
         ArrayList repositoryTypes = new ArrayList();
         int i;
  
@@ -201,8 +203,8 @@ public final class Bootstrap {
     {
 
         // Set Catalina path
-        setCatalinaHome();
-        setCatalinaBase();
+        setCatalinaHome();//set catalina.home
+        setCatalinaBase();//set catalina.base
 
         initClassLoaders();
 
@@ -458,6 +460,8 @@ public final class Bootstrap {
 
         if (System.getProperty("catalina.home") != null)
             return;
+        /**System.getProperty("user.dir")
+        	从JRE系统环境中获取当前工作目录*/
         File bootstrapJar = 
             new File(System.getProperty("user.dir"), "bootstrap.jar");
         if (bootstrapJar.exists()) {

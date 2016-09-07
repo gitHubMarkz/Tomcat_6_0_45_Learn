@@ -79,6 +79,7 @@ public class CatalinaProperties {
 
     /**
      * Load properties.
+     * 加载catalina.properties配置文件
      */
     private static void loadProperties() {
 
@@ -132,6 +133,7 @@ public class CatalinaProperties {
         }
 
         // Register the properties as system properties
+        // 把catalina.properties中的键值对加入到JRE环境中
         Enumeration enumeration = properties.propertyNames();
         while (enumeration.hasMoreElements()) {
             String name = (String) enumeration.nextElement();

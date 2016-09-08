@@ -716,7 +716,9 @@ public class Digester extends DefaultHandler2 {
                     properties.put("schemaLocation", schemaLocation);
                     properties.put("schemaLanguage", schemaLanguage);
                 }
-                parser = ParserFeatureSetterFactory.newSAXParser(properties);               } else {
+                parser = ParserFeatureSetterFactory.newSAXParser(properties);         
+            } 
+            else {
                 parser = getFactory().newSAXParser();
             }
         } catch (Exception e) {

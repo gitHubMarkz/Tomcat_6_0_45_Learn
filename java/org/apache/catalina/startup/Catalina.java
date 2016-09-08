@@ -463,7 +463,7 @@ public class Catalina extends Embedded {
     public void load() {
 
         long t1 = System.nanoTime();
-
+        //初始化文件夹
         initDirs();
 
         // Before digester - it may be needed
@@ -478,7 +478,7 @@ public class Catalina extends Embedded {
         File file = null;
         try {
             file = configFile();
-            inputStream = new FileInputStream(file);
+            inputStream = new FileInputStream(file);//conf\server.xml
             inputSource = new InputSource("file://" + file.getAbsolutePath());
         } catch (Exception e) {
             ;

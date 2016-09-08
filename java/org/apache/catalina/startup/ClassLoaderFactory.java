@@ -261,6 +261,13 @@ public final class ClassLoaderFactory {
 
     }
 
+    /**
+     * 校验文件/文件夹是否存在并可读
+     * @param file
+     * @param type
+     * @return
+     * @throws IOException
+     */
     private static boolean validateFile(File file,
             Integer type) throws IOException {
         if (type == IS_DIR || type == IS_GLOB) {

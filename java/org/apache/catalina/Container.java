@@ -80,7 +80,7 @@ import org.apache.juli.logging.Log;
  * @author Remy Maucherat
  *
  */
-
+//Servlet容器接口，所有Servlet容器都要实现这个接口
 public interface Container {
 
 

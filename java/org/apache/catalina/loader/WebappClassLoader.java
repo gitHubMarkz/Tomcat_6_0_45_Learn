@@ -241,6 +241,7 @@ public class WebappClassLoader
 
         super(new URL[0]);
         this.parent = getParent();
+        //System classLoader
         system = getSystemClassLoader();
         securityManager = System.getSecurityManager();
 
@@ -415,6 +416,7 @@ public class WebappClassLoader
 
     /**
      * The system class loader.
+     * 构造函数中初始化为ClassLoader
      */
     protected ClassLoader system = null;
 
@@ -1570,6 +1572,7 @@ public class WebappClassLoader
         }
 
         // (0) Check our previously loaded local class cache
+        //从本地缓存的hashMap中查找
         clazz = findLoadedClass0(name);
         if (clazz != null) {
             if (log.isDebugEnabled())

@@ -80,7 +80,7 @@ import org.apache.juli.logging.Log;
  * @author Remy Maucherat
  *
  */
-//ServletÈİÆ÷½Ó¿Ú£¬ËùÓĞServletÈİÆ÷¶¼ÒªÊµÏÖÕâ¸ö½Ó¿Ú
+//Servletå®¹å™¨æ¥å£ï¼Œæ‰€æœ‰çš„servletå®¹å™¨éƒ½ç»§æ‰¿ä¸æ­¤æ¥å£
 public interface Container {
 
 

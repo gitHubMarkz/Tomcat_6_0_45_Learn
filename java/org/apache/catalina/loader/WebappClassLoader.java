@@ -416,7 +416,7 @@ public class WebappClassLoader
 
     /**
      * The system class loader.
-     * ¹¹Ôìº¯ÊýÖÐ³õÊ¼»¯ÎªClassLoader
+     * ç³»ç»ŸClassLoader
      */
     protected ClassLoader system = null;
 
@@ -1572,7 +1572,7 @@ public class WebappClassLoader
         }
 
         // (0) Check our previously loaded local class cache
-        //´Ó±¾µØ»º´æµÄhashMapÖÐ²éÕÒ
+        //ä»Žæœ¬åœ°ç¼“å­˜ä¸­æŸ¥æ‰¾ç±»
         clazz = findLoadedClass0(name);
         if (clazz != null) {
             if (log.isDebugEnabled())
@@ -1594,6 +1594,7 @@ public class WebappClassLoader
 
         // (0.2) Try loading the class with the system class loader, to prevent
         //       the webapp from overriding J2SE classes
+        //ä»ŽappClassLoaderä¸­æŸ¥æ‰¾ç±»
         try {
             clazz = system.loadClass(name);
             if (clazz != null) {

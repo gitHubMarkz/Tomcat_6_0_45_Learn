@@ -86,9 +86,15 @@ public final class Bootstrap {
 
     // -------------------------------------------------------- Private Methods
 
-
+    /**
+     * 初始化3个ClassLoader
+     * commonLoader
+     * catalinaLoader 是commonLoader的子加载器
+     * sharedLoader 是commonLoader的子加载器
+     */
     private void initClassLoaders() {
         try {
+            //parent参数为空的，默认父加载器是系统类加载器
             commonLoader = createClassLoader("common", null);
             if( commonLoader == null ) {
                 // no config file, default to this loader - we might be in a 'single' env.
@@ -105,14 +111,14 @@ public final class Bootstrap {
 
     private ClassLoader createClassLoader(String name, ClassLoader parent)
         throws Exception {
-
+        //CatalinaProperties加载的是conf下面的catalina.properties文件
         String value = CatalinaProperties.getProperty(name + ".loader");
         if ((value == null) || (value.equals("")))
             return parent;
 
-        //存放路径
+        //存放URL路径
         ArrayList repositoryLocations = new ArrayList();
-        //存放类型
+        //存放文件类型
         ArrayList repositoryTypes = new ArrayList();
         int i;
  
@@ -203,13 +209,15 @@ public final class Bootstrap {
     {
 
         // Set Catalina path
+        //设置TOMCAT自身使用的环境变量
+        //初始化的时候catalina.home和catalina.base都是user.dir
         setCatalinaHome();//set catalina.home
         setCatalinaBase();//set catalina.base
-
+        //初始化ClassLoader
         initClassLoaders();
-
+        //设置当前线程的类加载器
         Thread.currentThread().setContextClassLoader(catalinaLoader);
-
+        //加载自带的lib
         SecurityClassLoad.securityClassLoad(catalinaLoader);
 
         // Load our startup class and call its process() method
@@ -231,7 +239,7 @@ public final class Bootstrap {
         Method method =
             startupInstance.getClass().getMethod(methodName, paramTypes);
         method.invoke(startupInstance, paramValues);
-
+        //catalinaDaemo设置为Catalina类的实例
         catalinaDaemon = startupInstance;
 
     }
@@ -239,6 +247,7 @@ public final class Bootstrap {
 
     /**
      * Load daemon.
+     * 调用Catalina的load方法
      */
     private void load(String[] arguments)
         throws Exception {
@@ -256,7 +265,7 @@ public final class Bootstrap {
             param = new Object[1];
             param[0] = arguments;
         }
-        Method method = 
+        Method method =
             catalinaDaemon.getClass().getMethod(methodName, paramTypes);
         if (log.isDebugEnabled())
             log.debug("Calling startup class " + method);
@@ -382,7 +391,7 @@ public final class Bootstrap {
 
     /**
      * Main method, used for testing only.
-     *
+     * tomcat的启动方法
      * @param args Command line arguments to be processed
      */
     public static void main(String args[]) {
@@ -398,6 +407,7 @@ public final class Bootstrap {
         }
 
         try {
+            //根据传入的命令行参数进行相应的处理
             String command = "start";
             if (args.length > 0) {
                 command = args[args.length - 1];

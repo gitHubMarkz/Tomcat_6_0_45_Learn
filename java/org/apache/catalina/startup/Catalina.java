@@ -467,7 +467,7 @@ public class Catalina extends Embedded {
         initDirs();
 
         // Before digester - it may be needed
-
+        //在环境变量中初始化一些参数
         initNaming();
 
         // Create and execute our Digester

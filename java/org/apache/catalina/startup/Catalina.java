@@ -463,22 +463,23 @@ public class Catalina extends Embedded {
     public void load() {
 
         long t1 = System.nanoTime();
-        //初始化文件夹
+        // 设置环境变量
         initDirs();
-
         // Before digester - it may be needed
         //在环境变量中初始化一些参数
         initNaming();
 
         // Create and execute our Digester
+        //创建解析XML用的digester
         Digester digester = createStartDigester();
 
         InputSource inputSource = null;
         InputStream inputStream = null;
         File file = null;
         try {
+            //conf/server.xml
             file = configFile();
-            inputStream = new FileInputStream(file);//conf\server.xml
+            inputStream = new FileInputStream(file);
             inputSource = new InputSource("file://" + file.getAbsolutePath());
         } catch (Exception e) {
             ;
@@ -517,7 +518,7 @@ public class Catalina extends Embedded {
             }
             return;
         }
-
+        //解析server.xml
         try {
             inputSource.setByteStream(inputStream);
             digester.push(this);
@@ -530,7 +531,7 @@ public class Catalina extends Embedded {
         }
 
         // Stream redirection
-        initStreams();
+        initStreams();//LOG
 
         // Start the new server
         if (getServer() instanceof Lifecycle) {

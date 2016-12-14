@@ -4464,7 +4464,7 @@ public class StandardContext
 
     /**
      * Start this Context component.
-     *
+     * Context启动方法
      * @exception LifecycleException if a startup error occurs
      */
     public synchronized void start() throws LifecycleException {

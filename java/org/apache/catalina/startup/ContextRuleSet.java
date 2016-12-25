@@ -120,6 +120,7 @@ public class ContextRuleSet extends RuleSetBase {
         }
 
         if (create) {
+            //当读取到Context标签的时候去会默认给Context添加一个Listener（ContextConfig）
             digester.addRule(prefix + "Context",
                              new LifecycleListenerRule
                                  ("org.apache.catalina.startup.ContextConfig",

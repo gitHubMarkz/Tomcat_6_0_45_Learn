@@ -65,7 +65,8 @@ import org.xml.sax.SAXParseException;
  *
  * @author Craig R. McClanahan
  * @author Jean-Francois Arcand
- *
+ * Context启动时间的监听器，配置Context的属性，配置默认Servlets
+ * 在Context被load的时候被添加到Context的监听器列表中
  */
 public class ContextConfig implements LifecycleListener {
 

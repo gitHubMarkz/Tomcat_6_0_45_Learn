@@ -246,6 +246,7 @@ public class Catalina extends Embedded {
 
     /**
      * Create and configure the Digester we will be using for startup.
+     * 构造解析Server.xml文件的解析规则
      */
     protected Digester createStartDigester() {
         long t1=System.currentTimeMillis();
@@ -332,8 +333,11 @@ public class Catalina extends Embedded {
 
         // Add RuleSets for nested elements
         digester.addRuleSet(new NamingRuleSet("Server/GlobalNamingResources/"));
+        //EngineRuleSet是Server/Service/Engine模式的解析规则
         digester.addRuleSet(new EngineRuleSet("Server/Service/"));
+        //HostRuleSet是Server/Service/Engine/Host模式的解析规则
         digester.addRuleSet(new HostRuleSet("Server/Service/Engine/"));
+        //ContextRuleSet是Server/Service/Engine/Host/Context模式的解析规则
         digester.addRuleSet(new ContextRuleSet("Server/Service/Engine/Host/"));
         digester.addRuleSet(ClusterRuleSetFactory.getClusterRuleSet("Server/Service/Engine/Host/Cluster/"));
         digester.addRuleSet(new NamingRuleSet("Server/Service/Engine/Host/Context/"));

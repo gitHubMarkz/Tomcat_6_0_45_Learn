@@ -75,6 +75,7 @@ public final class Bootstrap {
 
     /**
      * Daemon reference.
+     * Catalina类的实例
      */
     private Object catalinaDaemon = null;
 
@@ -229,6 +230,7 @@ public final class Bootstrap {
         Object startupInstance = startupClass.newInstance();
 
         // Set the shared extensions class loader
+        //设置Catalina实例的parentClassLoader
         if (log.isDebugEnabled())
             log.debug("Setting startup class properties");
         String methodName = "setParentClassLoader";
@@ -408,6 +410,7 @@ public final class Bootstrap {
 
         try {
             //根据传入的命令行参数进行相应的处理
+            //默认参数是start
             String command = "start";
             if (args.length > 0) {
                 command = args[args.length - 1];

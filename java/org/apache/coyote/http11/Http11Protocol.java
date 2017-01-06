@@ -178,6 +178,7 @@ public class Http11Protocol extends AbstractProtocol
         }
 
         try {
+            //创建ServerSocket
             endpoint.init();
         } catch (Exception ex) {
             log.error(sm.getString("http11protocol.endpoint.initerror"), ex);

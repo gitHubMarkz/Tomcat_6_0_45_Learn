@@ -1110,7 +1110,7 @@ public class Connector
         }
 
         this.initialized = true;
-
+        //JMX相关的代码
         if( oname == null && (container instanceof StandardEngine)) {
             try {
                 // we are loaded directly, via API - and no name was given to us

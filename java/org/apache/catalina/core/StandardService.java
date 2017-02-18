@@ -697,6 +697,7 @@ public class StandardService
                
 
         // Initialize our defined Connectors
+        //初始化连接器
         synchronized (connectors) {
             for (int i = 0; i < connectors.length; i++) {
                 try {

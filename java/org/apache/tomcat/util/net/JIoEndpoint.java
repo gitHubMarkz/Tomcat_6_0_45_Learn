@@ -84,6 +84,7 @@ public class JIoEndpoint extends AbstractEndpoint {
 
     /**
      * Available workers.
+     * worker线程栈
      */
     protected WorkerStack workers = null;
 
@@ -143,6 +144,7 @@ public class JIoEndpoint extends AbstractEndpoint {
 
     /**
      * External Executor based thread pool.
+     * 线程池
      */
     protected Executor executor = null;
     public void setExecutor(Executor executor) { this.executor = executor; }
@@ -151,6 +153,7 @@ public class JIoEndpoint extends AbstractEndpoint {
 
     /**
      * Maximum amount of worker threads.
+     * 默认200个接收线程
      */
     protected int maxThreads = 200;
     public void setMaxThreads(int maxThreads) {
@@ -363,7 +366,9 @@ public class JIoEndpoint extends AbstractEndpoint {
 
                 // Accept the next incoming connection from the server socket
                 try {
+                    //socket.accept()，没有请求会挂起
                     Socket socket = serverSocketFactory.acceptSocket(serverSocket);
+                    //空方法？
                     serverSocketFactory.initSocket(socket);
                     // Hand this socket off to an appropriate processor
                     if (!processSocket(socket)) {
@@ -583,6 +588,7 @@ public class JIoEndpoint extends AbstractEndpoint {
             paused = false;
 
             // Create worker collection
+            //创建工作线程栈
             if (executor == null) {
                 workers = new WorkerStack(maxThreads);
             }
@@ -769,6 +775,7 @@ public class JIoEndpoint extends AbstractEndpoint {
         // Allocate a new worker thread
         synchronized (workers) {
             Worker workerThread;
+            //如果worker线程为空，则挂起等待
             while ((workerThread = createWorkerThread()) == null) {
                 try {
                     workers.wait();
@@ -783,7 +790,7 @@ public class JIoEndpoint extends AbstractEndpoint {
 
     /**
      * Recycle the specified Processor so that it can be used again.
-     *
+     * 释放worker线程
      * @param workerThread The processor to be recycled
      */
     protected void recycleWorkerThread(Worker workerThread) {
